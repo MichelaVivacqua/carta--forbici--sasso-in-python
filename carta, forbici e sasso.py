@@ -5,6 +5,11 @@ print("CARTA, FORBICI E SASSO 1.0")
 print("Benvenuto al nostro nuovo minigioco! Inserisci il tuo nome")
 nome_giocatore = input()
 
+# Modalità invincibile
+modalita_invincibile = input("Vuoi la modalità invincibile? Rispondi si o no      ").lower() == "si"
+if modalita_invincibile:
+    print("Modalità invincibile attivata!")
+
 # Chiedi al giocatore quante partite vuole svolgere
 print("Perfetto, " + nome_giocatore + "! Iniziamo! Quante partite vuoi giocare?")
 num_partite = int(input())
@@ -25,8 +30,16 @@ for i in range(num_partite):
         exit()
     else:
         SCELTE_POSSIBILI = ["CARTA", "FORBICI", "SASSO"]
-        scelta_computer = random.choice(SCELTE_POSSIBILI)
-        print("Il computer ha scelto:", scelta_computer)
+        if modalita_invincibile:
+            if scelta_giocatore == "CARTA":
+                scelta_computer = "SASSO"
+            elif scelta_giocatore == "FORBICI":
+                scelta_computer = "CARTA"
+            elif scelta_giocatore == "SASSO":
+                scelta_computer = "FORBICI"
+            else:
+               scelta_computer = random.choice(SCELTE_POSSIBILI)
+               print("Il computer ha scelto:", scelta_computer)
 
         # Determinare il vincitore
         if scelta_giocatore == scelta_computer:
